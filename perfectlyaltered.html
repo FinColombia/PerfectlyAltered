@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Luciana's Altered Media Detective Lab</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;900&family=Fraunces:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+
+:root{
+--purple:#5B21B6;
+--light:#ede9fe;
+--red:#dc2626;
+}
+
+body{
+font-family:'Nunito',sans-serif;
+background:#faf9f6;
+margin:0;
+}
+
+.hero{
+background:linear-gradient(120deg,#5B21B6,#7C3AED);
+color:white;
+padding:40px;
+text-align:center;
+}
+
+.hero h1{
+font-family:'Fraunces';
+font-size:40px;
+}
+
+.container{
+max-width:950px;
+margin:auto;
+padding:30px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:14px;
+margin-bottom:25px;
+}
+
+input,select{
+padding:10px;
+font-size:16px;
+margin-right:15px;
+}
+
+.tab-bar{
+display:flex;
+flex-wrap:wrap;
+gap:6px;
+margin-bottom:15px;
+}
+
+.tab-btn{
+padding:10px 14px;
+font-weight:900;
+background:var(--light);
+border:none;
+cursor:pointer;
+}
+
+.tab-btn.active{
+background:var(--purple);
+color:white;
+}
+
+.submit-tab{
+background:#fee2e2;
+color:var(--red);
+}
+
+.tab-panel{
+display:none;
+}
+
+.tab-panel.active{
+display:block;
+}
+
+.q-block{
+margin-bottom:18px;
+padding:15px;
+border:1px solid #ddd;
+border-radius:8px;
+}
+
+.q-block strong{
+color:var(--purple);
+}
+
+.mc-opt{
+display:block;
+width:100%;
+padding:12px;
+margin-top:6px;
+border:2px solid var(--purple);
+background:white;
+color:var(--purple);
+font-weight:900;
+cursor:pointer;
+}
+
+.mc-opt.selected{
+background:var(--purple);
+color:white;
+}
+
+.flashcard{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:15px;
+}
+
+.card-box{
+width:240px;
+height:150px;
+background:var(--purple);
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:900;
+font-size:26px;
+border-radius:12px;
+cursor:pointer;
+text-align:center;
+padding:10px;
+}
+
+.wordcount{
+text-align:center;
+font-weight:800;
+margin-top:10px;
+}
+
+textarea{
+width:100%;
+height:80px;
+}
+
+.export-box{
+text-align:center;
+padding:40px;
+}
+
+.export-box h2{
+font-size:36px;
+color:var(--red);
+}
+
+.status-msg{
+margin-top:20px;
+font-weight:900;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<div class="hero">
+
+<h1>
+Luciana's <i>Altered</i> Media Detective Lab
+</h1>
+
+</div>
+
+
+<div class="container">
+
+
+<!-- =====================================================
+     STUDENT INFORMATION
+===================================================== -->
+
+<div class="card">
+
+<label>Name:</label>
+
+<input
+    id="studentName"
+    type="text"
+>
+
+
+<label>Class:</label>
+
+<select id="studentClass">
+
+<option></option>
+<option>3A</option>
+<option>3B</option>
+<option>3C</option>
+
+</select>
+
+</div>
+
+
+<!-- =====================================================
+     VOCABULARY
+===================================================== -->
+
+<div class="card">
+
+<h3>
+Vocabulary Detective Cards
+</h3>
+
+<div class="flashcard">
+
+<div
+    class="card-box"
+    onclick="flipCard()"
+    id="cardBox"
+>
+alter
+</div>
+
+<button
+    type="button"
+    onclick="nextWord()"
+>
+Next Word →
+</button>
+
+</div>
+
+<div
+    class="wordcount"
+    id="wordCount"
+>
+Word 1 of 6
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     QUIZ CARD
+===================================================== -->
+
+<div class="card">
+
+
+<!-- TAB BUTTONS -->
+
+<div class="tab-bar">
+
+<button
+    type="button"
+    class="tab-btn active"
+    onclick="openTab(event,'L1')"
+>
+Level 1
+</button>
+
+<button
+    type="button"
+    class="tab-btn"
+    onclick="openTab(event,'L2')"
+>
+Level 2
+</button>
+
+<button
+    type="button"
+    class="tab-btn"
+    onclick="openTab(event,'L3')"
+>
+Level 3
+</button>
+
+<button
+    type="button"
+    class="tab-btn"
+    onclick="openTab(event,'L4')"
+>
+Level 4
+</button>
+
+<button
+    type="button"
+    class="tab-btn"
+    onclick="openTab(event,'L5')"
+>
+Level 5
+</button>
+
+<button
+    type="button"
+    class="tab-btn submit-tab"
+    onclick="openTab(event,'SUBMIT')"
+>
+Submit
+</button>
+
+</div>
+
+
+<!-- =====================================================
+     LEVEL 1
+===================================================== -->
+
+<div
+    id="L1"
+    class="tab-panel active"
+>
+
+<p>
+Luciana noticed a cereal advertisement in a shop window in Barranquilla. The cereal looked bright and shiny.
+</p>
+
+<p>
+Luciana remembered that advertisements sometimes alter photos to make food look tastier than it really is.
+</p>
+
+<div id="quiz1"></div>
+
+<p>
+<b>Detective Reflection:</b>
+</p>
+
+<textarea
+    id="ref1"
+    placeholder="What did the company change in the cereal photo?"
+></textarea>
+
+</div>
+
+
+<!-- =====================================================
+     LEVEL 2
+===================================================== -->
+
+<div
+    id="L2"
+    class="tab-panel"
+>
+
+<p>
+Luciana visited her cousin in Washington D.C.
+</p>
+
+<p>
+They watched a video showing a dog that appeared to talk.
+</p>
+
+<p>
+Luciana's cousin believed the dog was magical.
+</p>
+
+<p>
+Luciana noticed the mouth movements looked edited.
+</p>
+
+<div id="quiz2"></div>
+
+<p>
+<b>Detective Reflection:</b>
+</p>
+
+<textarea
+    id="ref2"
+    placeholder="Why did the dog video look real?"
+></textarea>
+
+</div>
+
+
+<!-- =====================================================
+     LEVEL 3
+===================================================== -->
+
+<div
+    id="L3"
+    class="tab-panel"
+>
+
+<p>
+Luciana saw a message saying she won a free horse.
+</p>
+
+<p>
+The picture looked exciting and realistic.
+</p>
+
+<p>
+The message asked her to click quickly.
+</p>
+
+<p>
+Luciana remembered scammers often use altered images.
+</p>
+
+<p>
+She decided not to click the link.
+</p>
+
+<div id="quiz3"></div>
+
+<p>
+<b>Detective Reflection:</b>
+</p>
+
+<textarea
+    id="ref3"
+    placeholder="What clues showed the message might be a scam?"
+></textarea>
+
+</div>
+
+
+<!-- =====================================================
+     LEVEL 4
+===================================================== -->
+
+<div
+    id="L4"
+    class="tab-panel"
+>
+
+<p>
+Luciana saw a fashion advertisement in Paris.
+</p>
+
+<p>
+The model's skin looked perfectly smooth.
+</p>
+
+<p>
+Luciana knew real skin often has freckles and marks.
+</p>
+
+<p>
+Many photos are edited with computer software.
+</p>
+
+<p>
+Editors remove imperfections.
+</p>
+
+<p>
+This can create unrealistic beauty expectations.
+</p>
+
+<div id="quiz4"></div>
+
+<p>
+<b>Detective Reflection:</b>
+</p>
+
+<textarea
+    id="ref4"
+    placeholder="Why might companies edit photos of people?"
+></textarea>
+
+</div>
+
+
+<!-- =====================================================
+     LEVEL 5
+===================================================== -->
+
+<div
+    id="L5"
+    class="tab-panel"
+>
+
+<p>
+Luciana visited a classroom in Abuja discussing misinformation.
+</p>
+
+<p>
+Modern software can alter videos.
+</p>
+
+<p>
+Some clips show famous people saying things they never said.
+</p>
+
+<p>
+These videos can spread quickly online.
+</p>
+
+<p>
+People sometimes share them without checking.
+</p>
+
+<p>
+This spreads misinformation.
+</p>
+
+<p>
+Luciana said detectives must investigate sources.
+</p>
+
+<p>
+They should ask who created the message and why.
+</p>
+
+<div id="quiz5"></div>
+
+<p>
+<b>Detective Reflection:</b>
+</p>
+
+<textarea
+    id="ref5"
+    placeholder="What questions help detect misinformation?"
+></textarea>
+
+</div>
+
+
+<!-- =====================================================
+     SUBMIT
+===================================================== -->
+
+<div
+    id="SUBMIT"
+    class="tab-panel"
+>
+
+<div class="export-box">
+
+<h2>
+Export your work and submit to Schoology
+</h2>
+
+<button
+    type="button"
+    id="submitButton"
+    onclick="exportPDF()"
+>
+Save PDF
+</button>
+
+<div
+    id="statusMsg"
+    class="status-msg"
+></div>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   GOOGLE APPS SCRIPT URL
+===================================================== */
+
+/*
+IMPORTANT:
+
+This must be your deployed Web App URL ending in /exec.
+
+DO NOT use /dev.
+
+DO NOT put this URL in a <script src=""> tag.
+
+It is only used by fetch() inside exportPDF().
+*/
+
+const scriptUrl =
+"https://script.google.com/macros/s/AKfycbwMJbeJgBIhMldg5AMQmjkR6pjLMZPOjLs3ANI4JI9fJ9mM5Z8b8T6Agn_3DcCKDijtdw/exec";
+
+
+/* =====================================================
+   VOCABULARY
+===================================================== */
+
+const vocab = [
+
+{
+    w:"alter",
+    d:"to change something"
+},
+
+{
+    w:"edit",
+    d:"to change media using tools"
+},
+
+{
+    w:"appearance",
+    d:"how something looks"
+},
+
+{
+    w:"persuade",
+    d:"to convince someone"
+},
+
+{
+    w:"advertisement",
+    d:"a message promoting a product"
+},
+
+{
+    w:"scam",
+    d:"a trick used to steal or deceive"
+}
+
+];
+
+
+let v = 0;
+
+let flipped = false;
+
+
+/* =====================================================
+   FLIP VOCABULARY CARD
+===================================================== */
+
+function flipCard(){
+
+    flipped = !flipped;
+
+    const cardBox =
+        document.getElementById("cardBox");
+
+    cardBox.innerText =
+        flipped
+        ? vocab[v].d
+        : vocab[v].w;
+}
+
+
+/* =====================================================
+   NEXT VOCABULARY WORD
+===================================================== */
+
+function nextWord(){
+
+    v =
+        (v + 1) % vocab.length;
+
+    flipped = false;
+
+    const cardBox =
+        document.getElementById("cardBox");
+
+    const wordCount =
+        document.getElementById("wordCount");
+
+    cardBox.innerText =
+        vocab[v].w;
+
+    wordCount.innerText =
+        "Word " +
+        (v + 1) +
+        " of " +
+        vocab.length;
+}
+
+
+/* =====================================================
+   TABS
+===================================================== */
+
+function openTab(evt,id){
+
+    document
+        .querySelectorAll(".tab-panel")
+        .forEach(function(panel){
+
+            panel.classList.remove("active");
+
+        });
+
+
+    document
+        .querySelectorAll(".tab-btn")
+        .forEach(function(button){
+
+            button.classList.remove("active");
+
+        });
+
+
+    document
+        .getElementById(id)
+        .classList.add("active");
+
+
+    evt.currentTarget
+        .classList.add("active");
+}
+
+
+/* =====================================================
+   QUESTIONS
+===================================================== */
+
+const quizzes = {
+
+quiz1:[
+
+{
+    q:"Where was Luciana?",
+    a:["Paris","Barranquilla","Rome"],
+    c:1
+},
+
+{
+    q:"Why might the cereal look shiny?",
+    a:["Magic","Photo alteration","Real light"],
+    c:1
+}
+
+],
+
+
+quiz2:[
+
+{
+    q:"Where did Luciana travel?",
+    a:["Washington","Tokyo","Madrid"],
+    c:0
+},
+
+{
+    q:"What animal appeared to talk?",
+    a:["Dog","Cat","Horse"],
+    c:0
+},
+
+{
+    q:"Why did it seem real?",
+    a:["Video editing","Magic","Training"],
+    c:0
+},
+
+{
+    q:"What clue showed editing?",
+    a:["Mouth movement","Music","Color"],
+    c:0
+}
+
+],
+
+
+quiz3:[
+
+{
+    q:"What prize did the message promise?",
+    a:["Money","Horse","Car"],
+    c:1
+},
+
+{
+    q:"Why did the message want Luciana to click quickly?",
+    a:["Excitement","To trick her","For fun"],
+    c:1
+},
+
+{
+    q:"What type of message might this be?",
+    a:["Advertisement","Scam","News"],
+    c:1
+},
+
+{
+    q:"What clue made Luciana suspicious?",
+    a:["Urgent message","Happy picture","Bright color"],
+    c:0
+},
+
+{
+    q:"What skill helped Luciana?",
+    a:["Cooking","Media detective thinking","Drawing"],
+    c:1
+},
+
+{
+    q:"What did Luciana decide to do?",
+    a:["Click link","Ignore message","Share it"],
+    c:1
+}
+
+],
+
+
+quiz4:[
+
+{
+    q:"Where was the advertisement?",
+    a:["Paris","Rome","London"],
+    c:0
+},
+
+{
+    q:"What looked unrealistic?",
+    a:["Skin","Clothes","Hair"],
+    c:0
+},
+
+{
+    q:"What tool edits photos?",
+    a:["Camera","Software","Paint"],
+    c:1
+},
+
+{
+    q:"Why do editors remove marks?",
+    a:["To save space","To change appearance","For fun"],
+    c:1
+},
+
+{
+    q:"What effect can this create?",
+    a:["Confusion","Unrealistic beauty","Better weather"],
+    c:1
+},
+
+{
+    q:"Why might companies edit photos?",
+    a:["To persuade buyers","To hide photos","To save time"],
+    c:0
+},
+
+{
+    q:"What should viewers remember?",
+    a:["Photos are always real","Media can be altered","Models are perfect"],
+    c:1
+},
+
+{
+    q:"What skill helps understand ads?",
+    a:["Media literacy","Math","Running"],
+    c:0
+}
+
+],
+
+
+quiz5:[
+
+{
+    q:"What technology can alter videos?",
+    a:["Software","Paper","Paint"],
+    c:0
+},
+
+{
+    q:"Who might appear in altered videos?",
+    a:["Actors","Famous people","Animals"],
+    c:1
+},
+
+{
+    q:"Why is misinformation dangerous?",
+    a:["It spreads false ideas","It saves time","It helps people"],
+    c:0
+},
+
+{
+    q:"Where does misinformation spread quickly?",
+    a:["Libraries","Social media","Museums"],
+    c:1
+},
+
+{
+    q:"Why do people share misinformation?",
+    a:["They check sources","They forget to check","They investigate"],
+    c:1
+},
+
+{
+    q:"What should detectives check?",
+    a:["Color","Source","Music"],
+    c:1
+},
+
+{
+    q:"What question should you ask?",
+    a:["Who created it?","Who likes it?","Who watched it?"],
+    c:0
+},
+
+{
+    q:"Another important question?",
+    a:["Why was it made?","What color is it?","Who filmed it?"],
+    c:0
+},
+
+{
+    q:"What skill helps stop misinformation?",
+    a:["Media literacy","Driving","Cooking"],
+    c:0
+},
+
+{
+    q:"What is Luciana teaching?",
+    a:["Critical thinking","Sports","Painting"],
+    c:0
+}
+
+]
+
+};
+
+
+let answers = {};
+
+
+/* =====================================================
+   LOAD QUIZZES
+===================================================== */
+
+function loadQuiz(){
+
+    for(let id in quizzes){
+
+        const container =
+            document.getElementById(id);
+
+
+        quizzes[id].forEach(
+            function(item,i){
+
+                const q =
+                    document.createElement("div");
+
+                q.className =
+                    "q-block";
+
+
+                q.innerHTML =
+                    "<strong>" +
+                    (i + 1) +
+                    ". " +
+                    item.q +
+                    "</strong>";
+
+
+                item.a.forEach(
+                    function(opt,oi){
+
+                        const b =
+                            document.createElement("button");
+
+                        b.type = "button";
+
+                        b.className =
+                            "mc-opt";
+
+                        b.innerText =
+                            opt;
+
+
+                        b.onclick =
+                            function(){
+
+                                q
+                                .querySelectorAll(".mc-opt")
+                                .forEach(function(x){
+
+                                    x.classList.remove(
+                                        "selected"
+                                    );
+
+                                });
+
+
+                                b.classList.add(
+                                    "selected"
+                                );
+
+
+                                answers[
+                                    id + "-" + i
+                                ] = oi;
+
+                            };
+
+
+                        q.appendChild(b);
+
+                    }
+                );
+
+
+                container.appendChild(q);
+
+            }
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CALCULATE SCORE
+===================================================== */
+
+function calculateScore(){
+
+    let total = 0;
+
+    let correct = 0;
+
+
+    for(let id in quizzes){
+
+        quizzes[id].forEach(
+            function(q,i){
+
+                total++;
+
+
+                if(
+                    answers[id + "-" + i] ==
+                    q.c
+                ){
+
+                    correct++;
+
+                }
+
+            }
+        );
+
+    }
+
+
+    return {
+
+        correct: correct,
+
+        total: total,
+
+        percent:
+            total > 0
+            ? Math.round(
+                (correct / total) * 100
+              )
+            : 0
+
+    };
+
+}
+
+
+/* =====================================================
+   EXPORT PDF + SEND TO APPS SCRIPT
+===================================================== */
+
+async function exportPDF(){
+
+    const button =
+        document.getElementById(
+            "submitButton"
+        );
+
+    const status =
+        document.getElementById(
+            "statusMsg"
+        );
+
+
+    try {
+
+        /* ---------------------------------------------
+           Disable button while submitting
+        --------------------------------------------- */
+
+        button.disabled = true;
+
+        status.innerText =
+            "Creating your PDF...";
+
+
+        /* ---------------------------------------------
+           Check jsPDF
+        --------------------------------------------- */
+
+        if(
+            !window.jspdf ||
+            !window.jspdf.jsPDF
+        ){
+
+            throw new Error(
+                "The PDF library did not load."
+            );
+
+        }
+
+
+        const { jsPDF } =
+            window.jspdf;
+
+
+        /* ---------------------------------------------
+           Student information
+        --------------------------------------------- */
+
+        const name =
+            document
+                .getElementById(
+                    "studentName"
+                )
+                .value
+                .trim()
+            || "student";
+
+
+        const studentClass =
+            document
+                .getElementById(
+                    "studentClass"
+                )
+                .value
+            || "N/A";
+
+
+        /* ---------------------------------------------
+           Score
+        --------------------------------------------- */
+
+        const score =
+            calculateScore();
+
+
+        /* ---------------------------------------------
+           Create PDF
+        --------------------------------------------- */
+
+        const pdf =
+            new jsPDF();
+
+
+        let y = 10;
+
+
+        pdf.setFontSize(12);
+
+
+        pdf.text(
+            "Student: " + name,
+            10,
+            y
+        );
+
+        y += 8;
+
+
+        pdf.text(
+            "Class: " + studentClass,
+            10,
+            y
+        );
+
+        y += 8;
+
+
+        pdf.text(
+            "Score: " +
+            score.correct +
+            "/" +
+            score.total +
+            " (" +
+            score.percent +
+            "%)",
+            10,
+            y
+        );
+
+        y += 10;
+
+
+        /* ---------------------------------------------
+           Add questions and answers
+        --------------------------------------------- */
+
+        for(let id in quizzes){
+
+            pdf.setFont(
+                undefined,
+                "bold"
+            );
+
+
+            pdf.text(
+                "Section " + id,
+                10,
+                y
+            );
+
+
+            y += 8;
+
+
+            pdf.setFont(
+                undefined,
+                "normal"
+            );
+
+
+            quizzes[id].forEach(
+                function(q,i){
+
+                    const answer =
+                        q.a[
+                            answers[
+                                id + "-" + i
+                            ]
+                        ]
+                        || "No answer";
+
+
+                    const text =
+                        (i + 1) +
+                        ". " +
+                        q.q +
+                        " - " +
+                        answer;
+
+
+                    const lines =
+                        pdf.splitTextToSize(
+                            text,
+                            180
+                        );
+
+
+                    lines.forEach(
+                        function(line){
+
+                            if(y > 280){
+
+                                pdf.addPage();
+
+                                y = 10;
+
+                            }
+
+
+                            pdf.text(
+                                line,
+                                10,
+                                y
+                            );
+
+
+                            y += 6;
+
+                        }
+                    );
+
+                }
+            );
+
+
+            /* -----------------------------------------
+               Add reflection
+            ----------------------------------------- */
+
+            const reflectionElement =
+                document.getElementById(
+                    "ref" +
+                    id.replace("quiz","")
+                );
+
+
+            if(reflectionElement){
+
+                const reflection =
+                    reflectionElement
+                        .value
+                        .trim();
+
+
+                if(reflection){
+
+                    pdf.setFont(
+                        undefined,
+                        "italic"
+                    );
+
+
+                    const reflectionLines =
+                        pdf.splitTextToSize(
+                            "Reflection: " +
+                            reflection,
+                            180
+                        );
+
+
+                    reflectionLines.forEach(
+                        function(line){
+
+                            if(y > 280){
+
+                                pdf.addPage();
+
+                                y = 10;
+
+                            }
+
+
+                            pdf.text(
+                                line,
+                                10,
+                                y
+                            );
+
+
+                            y += 6;
+
+                        }
+                    );
+
+
+                    pdf.setFont(
+                        undefined,
+                        "normal"
+                    );
+
+                }
+
+            }
+
+
+            y += 5;
+
+        }
+
+
+        /* ---------------------------------------------
+           Filename
+        --------------------------------------------- */
+
+        const safeName =
+            name
+                .replace(
+                    /[^a-z0-9]/gi,
+                    "_"
+                )
+                .replace(
+                    /_+/g,
+                    "_"
+                );
+
+
+        const fileName =
+            safeName +
+            "_" +
+            studentClass +
+            "_media_detective_quiz.pdf";
+
+
+        /* ---------------------------------------------
+           Download local PDF
+        --------------------------------------------- */
+
+        pdf.save(fileName);
+
+
+        status.innerText =
+            "PDF created. Sending submission...";
+
+
+        /* ---------------------------------------------
+           Convert PDF to Base64
+        --------------------------------------------- */
+
+        const dataUri =
+            pdf.output(
+                "datauristring"
+            );
+
+
+        const pdfBase64 =
+            dataUri.split(",")[1];
+
+
+        if(!pdfBase64){
+
+            throw new Error(
+                "Could not convert PDF to Base64."
+            );
+
+        }
+
+
+        /* ---------------------------------------------
+           Prepare data
+        --------------------------------------------- */
+
+        const payload = {
+
+            studentName: name,
+
+            studentClass:
+                studentClass,
+
+            score: {
+
+                correct:
+                    score.correct,
+
+                total:
+                    score.total,
+
+                percent:
+                    score.percent
+
+            },
+
+            filename:
+                fileName,
+
+            pdfBase64:
+                pdfBase64
+
+        };
+
+
+        console.log(
+            "Submitting to Apps Script:",
+            payload
+        );
+
+
+        /* ---------------------------------------------
+           SEND TO GOOGLE APPS SCRIPT
+           
+           IMPORTANT:
+           
+           text/plain is intentional.
+           
+           Do NOT change this to
+           application/json.
+        --------------------------------------------- */
+
+        await fetch(
+            scriptUrl,
+            {
+
+                method: "POST",
+
+                mode: "no-cors",
+
+                headers: {
+
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+
+                },
+
+                body:
+                    JSON.stringify(
+                        payload
+                    )
+
+            }
+        );
+
+
+        /* ---------------------------------------------
+           Finished
+           
+           Because no-cors prevents the browser
+           from reading the Apps Script response,
+           this means the request was sent.
+        --------------------------------------------- */
+
+        status.innerText =
+            "Your work has been submitted.";
+
+        status.style.color =
+            "green";
+
+
+        alert(
+            "Your PDF was saved and your submission was sent."
+        );
+
+
+    } catch(error){
+
+        console.error(
+            "Submission error:",
+            error
+        );
+
+
+        status.innerText =
+            "The PDF was created, but there was a problem sending the submission.";
+
+        status.style.color =
+            "red";
+
+
+        alert(
+            "The PDF was created, but the submission could not be sent. Please tell your teacher."
+        );
+
+
+    } finally {
+
+        button.disabled = false;
+
+    }
+
+}
+
+
+/* =====================================================
+   START THE QUIZ
+===================================================== */
+
+loadQuiz();
+
+</script>
+
+</body>
+
+</html>
